@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PsyMap — Sources & Literature</title>
+  <link rel="icon" type="image/png" sizes="120x120" href="img/icon-120.png">
+  <link rel="apple-touch-icon" href="img/icon-152.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="img/icon-120.png" alt="" class="nav-logo-img"> PsyMap</a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="navHome">Home</a>
+      <a href="support.html" data-i18n="navSupport">Support</a>
+      <a href="privacy.html" data-i18n="navPrivacy">Privacy</a>
+      <a href="evidence.html" data-i18n="navEvidence">Sources</a>
+      <span class="lang-switcher">
+        <a href="#" data-lang="ru" aria-label="Русский">RU</a>
+        <span class="lang-sep">|</span>
+        <a href="#" data-lang="en" aria-label="English">EN</a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <h1 data-i18n="evidenceTitle">Sources & Literature</h1>
+  <p data-i18n="evidenceIntro">Structured list of sources grounding the app's educational content.</p>
+
+  <div id="evidence-list"></div>
+
+  <div class="disclaimer-inner" style="margin-top: 40px;">
+    <h3 data-i18n="disclaimerTitle">Important</h3>
+    <p data-i18n="evidenceDisclaimer">This is bibliography for the educational materials. The app does not provide diagnosis, treatment, or medical recommendations.</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="support.html" data-i18n="navSupport">Support</a>
+    <a href="privacy.html" data-i18n="navPrivacy">Privacy</a>
+    <a href="evidence.html" data-i18n="navEvidence">Sources</a>
+  </div>
+  <p data-i18n="footerCopy">© 2026 PsyMap. Educational reference tool.</p>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/evidence-data.js"></script>
+<script>
+(function() {
+  const catOrder = ['clinicalGuidelines', 'metaAnalyses', 'books', 'scientificArticles'];
+  const catNames = {
+    clinicalGuidelines: { ru: 'Профессиональные гайдлайны и справочники', en: 'Professional Guidelines & References' },
+    metaAnalyses:       { ru: 'Мета-анализы и систематические обзоры', en: 'Meta-Analyses & Systematic Reviews' },
+    books:              { ru: 'Ключевые книги', en: 'Key Books' },
+    scientificArticles: { ru: 'Научные статьи (исследования)', en: 'Scientific Articles (Research Studies)' },
+  };
+  const catColors = {
+    clinicalGuidelines: '#3478F6',
+    metaAnalyses: '#34C759',
+    books: '#FF8C00',
+    scientificArticles: '#AF52DE',
+  };
+  const openLabelByLang = { ru: 'Открыть источник', en: 'Open source' };
+
+  function renderEvidence() {
+    const container = document.getElementById('evidence-list');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const openLabel = openLabelByLang[LANG] || openLabelByLang.en;
+
+    catOrder.forEach(cat => {
+      const sources = EVIDENCE_DATA.filter(s => s.category === cat);
+      if (!sources.length) return;
+
+      const section = document.createElement('div');
+      section.className = 'evidence-category';
+
+      const h2 = document.createElement('h2');
+      h2.style.color = catColors[cat];
+      h2.textContent = catNames[cat][LANG] || catNames[cat].en;
+      section.appendChild(h2);
+
+      sources.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'evidence-item';
+
+        const citation = document.createElement('div');
+        citation.className = 'citation';
+        citation.textContent = LANG === 'ru' ? s.citation_ru : s.citation_en;
+        div.appendChild(citation);
+
+        const rel = document.createElement('div');
+        rel.className = 'relevance';
+        rel.textContent = '→ ' + (LANG === 'ru' ? s.relevance_ru : s.relevance_en);
+        div.appendChild(rel);
+
+        if (s.url) {
+          const a = document.createElement('a');
+          a.className = 'link';
+          a.href = s.url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = openLabel;
+          div.appendChild(a);
+        }
+
+        section.appendChild(div);
+      });
+
+      container.appendChild(section);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderEvidence);
+  } else {
+    renderEvidence();
+  }
+  window.addEventListener('psymap:langchange', renderEvidence);
+})();
+</script>
+</body>
+</html>
