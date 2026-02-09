@@ -113,10 +113,6 @@ const T = {
     en: 'Have a question or feedback? Reach out to us.'
   },
   supportEmail:     { ru: 'Email', en: 'Email' },
-  supportResponse:  {
-    ru: 'Мы обычно отвечаем в течение 24–48 часов.',
-    en: 'We typically respond within 24-48 hours.'
-  },
 
   faqTitle:   { ru: 'Частые вопросы', en: 'FAQ' },
   faq1Q:      { ru: 'Приложение работает без интернета?', en: 'Does the app work offline?' },
