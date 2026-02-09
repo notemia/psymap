@@ -107,13 +107,16 @@ const T = {
   },
 
   // --- Support ---
-  supportTitle:     { ru: 'Поддержка', en: 'Support' },
+  supportTitle:     { ru: 'Связаться с нами', en: 'Contact Us' },
   supportIntro:     {
-    ru: 'Если у вас есть вопросы, предложения или проблема с приложением — напишите нам.',
-    en: 'If you have questions, suggestions, or issues with the app — contact us.'
+    ru: 'Есть вопрос или отзыв? Напишите нам.',
+    en: 'Have a question or feedback? Reach out to us.'
   },
-  supportEmail:     { ru: 'Email для связи', en: 'Contact email' },
-  supportEmailAddr: { ru: 'support@psymap.app', en: 'support@psymap.app' },
+  supportEmail:     { ru: 'Email', en: 'Email' },
+  supportResponse:  {
+    ru: 'Мы обычно отвечаем в течение 24–48 часов.',
+    en: 'We typically respond within 24-48 hours.'
+  },
 
   faqTitle:   { ru: 'Частые вопросы', en: 'FAQ' },
   faq1Q:      { ru: 'Приложение работает без интернета?', en: 'Does the app work offline?' },
@@ -160,10 +163,10 @@ const T = {
     ru: 'Мы не используем сторонние SDK аналитики. Мы не отслеживаем вашу активность.',
     en: 'We do not use third-party analytics SDKs. We do not track your activity.'
   },
-  priv5Title: { ru: '5. Дети', en: '5. Children' },
+  priv5Title: { ru: '5. Возраст и дети', en: '5. Age and Children' },
   priv5Text:  {
-    ru: 'Приложение не направлено на детей и не собирает данные детей. Рейтинг: 4+.',
-    en: 'The app is not directed at children and does not collect data from children. Rating: 4+.'
+    ru: 'Приложение предназначено для лиц 16+. Не направлено на детей и не собирает данные детей.',
+    en: 'This app is rated 16+. It is not directed at children and does not collect data from children.'
   },
   priv6Title: { ru: '6. Изменения', en: '6. Changes' },
   priv6Text:  {
